@@ -4,7 +4,6 @@ import { CreateAppointmentForm } from "@/app/features/appointments/components/Cr
 import { useAppointments } from "@/app/features/appointments/hooks/useAppointment";
 import { useAuth } from "@/app/features/shared/context/AuthContext";
 
-
 export default function DashboardPage() {
   const { user } = useAuth();
   const { appointments } = useAppointments();
@@ -20,7 +19,6 @@ export default function DashboardPage() {
       {user?.role === "patient" && (
         <CreateAppointmentForm />
       )}
-
 
       <h2>Consultas agendadas</h2>
 
