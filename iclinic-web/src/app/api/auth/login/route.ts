@@ -1,12 +1,14 @@
 import { NextResponse } from "next/server";
+import { UserRole } from "@/features/shared/types/role";
 
 const fakeUser = {
   id: "1",
-  name: "Administrador", 
+  name: "Gustavo",
   email: "teste@iclinic.com",
   password: "123456",
-  role: "admin", 
+  role: "doctor" as UserRole,
 };
+
 
 export async function POST(request: Request) {
   const { email, password } = await request.json();
@@ -21,8 +23,10 @@ export async function POST(request: Request) {
     );
   }
 
-  return NextResponse.json({
-    token: "fake-jwt-token",
+  const token = "fake-jwt-token";
+
+  // ✅ cria a resposta
+  const response = NextResponse.json({
     user: {
       id: fakeUser.id,
       name: fakeUser.name,
@@ -30,4 +34,17 @@ export async function POST(request: Request) {
       role: fakeUser.role,
     },
   });
+
+  // ✅ salva cookies (isso o middleware enxerga)
+  response.cookies.set("token", token, {
+    httpOnly: true,
+    path: "/",
+  });
+
+  response.cookies.set("role", fakeUser.role, {
+    httpOnly: true,
+    path: "/",
+  });
+
+  return response;
 }

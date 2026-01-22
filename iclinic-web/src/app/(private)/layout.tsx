@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { useAuth } from "../features/shared/context/AuthContext";
-import { Header } from "../features/shared/ui/Header";
-import { Sidebar } from "../features/shared/ui/Sidebar";
+import { useAuth } from "../../features/shared/context/AuthContext";
+import { Header } from "../../features/shared/ui/Header";
+import { Sidebar } from "../../features/shared/ui/Sidebar";
 
 export default function PrivateLayout({
   children,
@@ -26,10 +26,9 @@ export default function PrivateLayout({
   return (
     <div className="flex h-screen flex-col">
       <Header />
-
       <div className="flex flex-1">
         <Sidebar />
-        <main className="flex-1 p-6">{children}</main>
+        <main className="flex-1 p-6 bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200">{children}</main>
       </div>
     </div>
   );
